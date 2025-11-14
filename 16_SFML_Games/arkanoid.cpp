@@ -50,37 +50,37 @@ int arkanoid()
     
     
 
-    float dx=6, dy=5;
-    float x=300, y=300;
+    float ballVelocityX=6, ballVelocityY=5;
+    float xPos=300, yPos=300;
 
     while (app.isOpen())
     {
-       Event e;
-       while (app.pollEvent(e))
+       Event event;
+       while (app.pollEvent(event))
        {
-         if (e.type == Event::Closed)
+         if (event.type == Event::Closed)
              app.close();
        }
 
-    x+=dx;
+    xPos+=ballVelocityX;
     for (int i=0;i<blockCount;i++)
-        if ( FloatRect(x+3,y+3,6,6).intersects(blocks[i].getGlobalBounds()) ) 
-             {blocks[i].setPosition(-100,0); dx=-dx;}
+        if ( FloatRect(xPos+3,yPos+3,6,6).intersects(blocks[i].getGlobalBounds()) ) 
+             {blocks[i].setPosition(-100,0); ballVelocityX=-ballVelocityX;}
 
-    y+=dy;
+    yPos+=ballVelocityY;
     for (int i=0;i<blockCount;i++)
-        if ( FloatRect(x+3,y+3,6,6).intersects(blocks[i].getGlobalBounds()) ) 
-             {blocks[i].setPosition(-100,0); dy=-dy;}
+        if ( FloatRect(xPos+3,yPos+3,6,6).intersects(blocks[i].getGlobalBounds()) ) 
+             {blocks[i].setPosition(-100,0); ballVelocityY=-ballVelocityY;}
 
-    if (x<0 || x>520)  dx=-dx;
-    if (y<0 || y>450)  dy=-dy;
+    if (xPos<0 || xPos>520)  ballVelocityX=-ballVelocityX;
+    if (yPos<0 || yPos>450)  ballVelocityY=-ballVelocityY;
 
     if (Keyboard::isKeyPressed(Keyboard::Right)) paddleSprite.move(6,0);
     if (Keyboard::isKeyPressed(Keyboard::Left)) paddleSprite.move(-6,0);
 
-    if ( FloatRect(x,y,12,12).intersects(paddleSprite.getGlobalBounds()) ) dy=-(rand()%5+2);
+    if ( FloatRect(xPos,yPos,12,12).intersects(paddleSprite.getGlobalBounds()) ) ballVelocityY=-(rand()%5+2);
 
-    ballSprite.setPosition(x,y);
+    ballSprite.setPosition(xPos,yPos);
 
     app.clear();
     app.draw(backgroundSprite);
