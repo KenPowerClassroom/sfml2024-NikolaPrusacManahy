@@ -61,10 +61,20 @@ void setupBlock(Sprite* t_blocks, Texture& t_block_txr, int& t_blockCount)
     }
 }
 
+void checkPaddleCollision(float& ballPosX, float& ballPosY, float& ballVelocityY, Sprite& paddleSprite)
+{
+    if (FloatRect(ballPosX, ballPosY, 12, 12).intersects(paddleSprite.getGlobalBounds())) ballVelocityY = -(rand() % 5 + 2);
+}
+
 void checkPaddleInput(Sprite& paddleSprite)
 {
     if (Keyboard::isKeyPressed(Keyboard::Right)) paddleSprite.move(6, 0);
     if (Keyboard::isKeyPressed(Keyboard::Left)) paddleSprite.move(-6, 0);
+}
+
+void setBallPosition(float& ballPosX, float& ballPosY, Sprite& ballSprite)
+{
+    ballSprite.setPosition(ballPosX, ballPosY);
 }
 
 int arkanoid()
@@ -104,11 +114,11 @@ int arkanoid()
 
        checkPaddleInput(paddleSprite);
 
-        if ( FloatRect(ballPosX,ballPosY,12,12).intersects(paddleSprite.getGlobalBounds()) ) ballVelocityY=-(rand()%5+2);
+       checkPaddleCollision(ballPosX, ballPosY, ballVelocityY, paddleSprite);
 
-        ballSprite.setPosition(ballPosX,ballPosY);
+       setBallPosition(ballPosX, ballPosY, ballSprite);
 
-        drawWindow(window, backgroundSprite, ballSprite, paddleSprite, blocks, blockCount);
+       drawWindow(window, backgroundSprite, ballSprite, paddleSprite, blocks, blockCount);
     }
 
   return 0;
