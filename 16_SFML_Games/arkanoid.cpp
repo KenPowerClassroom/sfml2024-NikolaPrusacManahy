@@ -2,12 +2,18 @@
 #include <time.h>
 using namespace sf;
 
+// CONSTANTS
+const int SCREEN_WIDTH = 520;
+const int SCREEN_HEIGHT = 450;
+const int TARGET_FPS = 60;
+
+
 int arkanoid()
 {
     srand(time(0));
 
-    RenderWindow app(VideoMode(520, 450), "Arkanoid!");
-    app.setFramerateLimit(60);
+    RenderWindow app(VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Arkanoid!");
+    app.setFramerateLimit(TARGET_FPS);
 
     Texture block_txr,background_txr,ball_txr,paddle_txr;
     block_txr.loadFromFile("images/arkanoid/block01.png");
