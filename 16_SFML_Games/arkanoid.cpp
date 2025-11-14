@@ -8,16 +8,22 @@ const int SCREEN_HEIGHT = 450;
 const int TARGET_FPS = 60;
 
 
-void setupBlock(Sprite* blocks, Texture block_txr)
+void setupBlock(Sprite* t_blocks, Texture t_block_txr, int* t_blockCount)
 {
-    int n = 0;
-    for (int i = 1; i <= 10; i++)
-        for (int j = 1; j <= 10; j++)
+    const float BLOCK_SPACING_X = 43.f;
+    const float BLOCK_SPACING_Y = 20.f;
+    const int ROWS = 10;
+    const int COLS = 10;
+
+    for (int i = 1; i <= COLS; i++)
+    {
+        for (int j = 1; j <= ROWS; j++)
         {
-            blocks[n].setTexture(block_txr);
-            blocks[n].setPosition(i * 43, j * 20);
-            n++;
+            t_blocks[*t_blockCount].setTexture(t_block_txr);
+            t_blocks[*t_blockCount].setPosition(i * BLOCK_SPACING_X, j * BLOCK_SPACING_Y);
+            t_blockCount++;
         }
+    }
 }
 
 int arkanoid()
@@ -39,7 +45,9 @@ int arkanoid()
     const int MAX_BLOCKS = 1000;
     Sprite blocks[MAX_BLOCKS];
 
-    setupBlock(blocks, block_txr);
+    int blockCount = 0;
+    setupBlock(blocks, block_txr,&blockCount);
+    
     
 
     float dx=6, dy=5;
@@ -55,12 +63,12 @@ int arkanoid()
        }
 
     x+=dx;
-    for (int i=0;i<n;i++)
+    for (int i=0;i<blockCount;i++)
         if ( FloatRect(x+3,y+3,6,6).intersects(blocks[i].getGlobalBounds()) ) 
              {blocks[i].setPosition(-100,0); dx=-dx;}
 
     y+=dy;
-    for (int i=0;i<n;i++)
+    for (int i=0;i<blockCount;i++)
         if ( FloatRect(x+3,y+3,6,6).intersects(blocks[i].getGlobalBounds()) ) 
              {blocks[i].setPosition(-100,0); dy=-dy;}
 
@@ -79,7 +87,7 @@ int arkanoid()
     app.draw(ballSprite);
     app.draw(paddleSprite);
 
-    for (int i=0;i<n;i++)
+    for (int i=0;i<blockCount;i++)
      app.draw(blocks[i]);
 
     app.display();
