@@ -8,7 +8,7 @@ const int SCREEN_HEIGHT = 450;
 const int TARGET_FPS = 60;
 
 
-void setupBlock(Sprite* t_blocks, Texture t_block_txr, int* t_blockCount)
+void setupBlock(Sprite* t_blocks, Texture& t_block_txr, int& t_blockCount)
 {
     const float BLOCK_SPACING_X = 43.f;
     const float BLOCK_SPACING_Y = 20.f;
@@ -19,8 +19,8 @@ void setupBlock(Sprite* t_blocks, Texture t_block_txr, int* t_blockCount)
     {
         for (int j = 1; j <= ROWS; j++)
         {
-            t_blocks[*t_blockCount].setTexture(t_block_txr);
-            t_blocks[*t_blockCount].setPosition(i * BLOCK_SPACING_X, j * BLOCK_SPACING_Y);
+            t_blocks[t_blockCount].setTexture(t_block_txr);
+            t_blocks[t_blockCount].setPosition(i * BLOCK_SPACING_X, j * BLOCK_SPACING_Y);
             t_blockCount++;
         }
     }
@@ -46,7 +46,7 @@ int arkanoid()
     Sprite blocks[MAX_BLOCKS];
 
     int blockCount = 0;
-    setupBlock(blocks, block_txr,&blockCount);
+    setupBlock(blocks, block_txr,blockCount);
     
     
 
