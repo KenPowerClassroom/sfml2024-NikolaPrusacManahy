@@ -8,6 +8,18 @@ const int SCREEN_HEIGHT = 450;
 const int TARGET_FPS = 60;
 
 
+void setupBlock(Sprite* blocks, Texture block_txr)
+{
+    int n = 0;
+    for (int i = 1; i <= 10; i++)
+        for (int j = 1; j <= 10; j++)
+        {
+            blocks[n].setTexture(block_txr);
+            blocks[n].setPosition(i * 43, j * 20);
+            n++;
+        }
+}
+
 int arkanoid()
 {
     srand(time(0));
@@ -24,16 +36,11 @@ int arkanoid()
     Sprite backgroundSprite(background_txr), ballSprite(ball_txr), paddleSprite(paddle_txr);
     paddleSprite.setPosition(300,440);
 
-    Sprite blocks[1000];
+    const int MAX_BLOCKS = 1000;
+    Sprite blocks[MAX_BLOCKS];
 
-    int n=0;
-    for (int i=1;i<=10;i++)
-    for (int j=1;j<=10;j++)
-      {
-         blocks[n].setTexture(block_txr);
-         blocks[n].setPosition(i*43,j*20);
-         n++;
-      }
+    setupBlock(blocks, block_txr);
+    
 
     float dx=6, dy=5;
     float x=300, y=300;
