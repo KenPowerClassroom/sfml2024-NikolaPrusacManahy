@@ -21,17 +21,17 @@ int arkanoid()
     ball_txr.loadFromFile("images/arkanoid/ball.png");
     paddle_txr.loadFromFile("images/arkanoid/paddle.png");
 
-    Sprite sBackground(background_txr), sBall(ball_txr), sPaddle(paddle_txr);
-    sPaddle.setPosition(300,440);
+    Sprite backgroundSprite(background_txr), ballSprite(ball_txr), paddleSprite(paddle_txr);
+    paddleSprite.setPosition(300,440);
 
-    Sprite block[1000];
+    Sprite blocks[1000];
 
     int n=0;
     for (int i=1;i<=10;i++)
     for (int j=1;j<=10;j++)
       {
-         block[n].setTexture(block_txr);
-         block[n].setPosition(i*43,j*20);
+         blocks[n].setTexture(block_txr);
+         blocks[n].setPosition(i*43,j*20);
          n++;
       }
 
@@ -49,31 +49,31 @@ int arkanoid()
 
     x+=dx;
     for (int i=0;i<n;i++)
-        if ( FloatRect(x+3,y+3,6,6).intersects(block[i].getGlobalBounds()) ) 
-             {block[i].setPosition(-100,0); dx=-dx;}
+        if ( FloatRect(x+3,y+3,6,6).intersects(blocks[i].getGlobalBounds()) ) 
+             {blocks[i].setPosition(-100,0); dx=-dx;}
 
     y+=dy;
     for (int i=0;i<n;i++)
-        if ( FloatRect(x+3,y+3,6,6).intersects(block[i].getGlobalBounds()) ) 
-             {block[i].setPosition(-100,0); dy=-dy;}
+        if ( FloatRect(x+3,y+3,6,6).intersects(blocks[i].getGlobalBounds()) ) 
+             {blocks[i].setPosition(-100,0); dy=-dy;}
 
     if (x<0 || x>520)  dx=-dx;
     if (y<0 || y>450)  dy=-dy;
 
-    if (Keyboard::isKeyPressed(Keyboard::Right)) sPaddle.move(6,0);
-    if (Keyboard::isKeyPressed(Keyboard::Left)) sPaddle.move(-6,0);
+    if (Keyboard::isKeyPressed(Keyboard::Right)) paddleSprite.move(6,0);
+    if (Keyboard::isKeyPressed(Keyboard::Left)) paddleSprite.move(-6,0);
 
-    if ( FloatRect(x,y,12,12).intersects(sPaddle.getGlobalBounds()) ) dy=-(rand()%5+2);
+    if ( FloatRect(x,y,12,12).intersects(paddleSprite.getGlobalBounds()) ) dy=-(rand()%5+2);
 
-    sBall.setPosition(x,y);
+    ballSprite.setPosition(x,y);
 
     app.clear();
-    app.draw(sBackground);
-    app.draw(sBall);
-    app.draw(sPaddle);
+    app.draw(backgroundSprite);
+    app.draw(ballSprite);
+    app.draw(paddleSprite);
 
     for (int i=0;i<n;i++)
-     app.draw(block[i]);
+     app.draw(blocks[i]);
 
     app.display();
     }
