@@ -61,6 +61,12 @@ void setupBlock(Sprite* t_blocks, Texture& t_block_txr, int& t_blockCount)
     }
 }
 
+void checkPaddleInput(Sprite& paddleSprite)
+{
+    if (Keyboard::isKeyPressed(Keyboard::Right)) paddleSprite.move(6, 0);
+    if (Keyboard::isKeyPressed(Keyboard::Left)) paddleSprite.move(-6, 0);
+}
+
 int arkanoid()
 {
     srand(time(0));
@@ -96,8 +102,7 @@ int arkanoid()
        }
        cheackBallCollision(ballPosX, ballPosY, ballVelocityX, ballVelocityY, blocks, blockCount);
 
-        if (Keyboard::isKeyPressed(Keyboard::Right)) paddleSprite.move(6,0);
-        if (Keyboard::isKeyPressed(Keyboard::Left)) paddleSprite.move(-6,0);
+       checkPaddleInput(paddleSprite);
 
         if ( FloatRect(ballPosX,ballPosY,12,12).intersects(paddleSprite.getGlobalBounds()) ) ballVelocityY=-(rand()%5+2);
 
