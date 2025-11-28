@@ -81,6 +81,7 @@
     <ClCompile Include="16_SFML_Games.cpp" />
     <ClCompile Include="arkanoid.cpp" />
     <ClCompile Include="asteroids.cpp" />
+    <ClCompile Include="ball_collision.cpp" />
     <ClCompile Include="bejeweled.cpp" />
     <ClCompile Include="chess.cpp" />
     <ClCompile Include="doodle_jump.cpp" />

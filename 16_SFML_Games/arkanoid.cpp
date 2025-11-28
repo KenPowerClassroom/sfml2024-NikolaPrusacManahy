@@ -11,28 +11,6 @@ const int SCREEN_WIDTH = 520;
 const int SCREEN_HEIGHT = 450;
 const int TARGET_FPS = 60;
 
-void cheackBallCollision(float& ballPosX, float& ballPosY,
-    float& ballVelocityX, float& ballVelocityY,
-    Sprite* blocks, int& blockCount)
-{
-    ballPosX += ballVelocityX;
-    for (int i = 0; i < blockCount; i++)
-        if (FloatRect(ballPosX + 3, ballPosY + 3, 6, 6).intersects(blocks[i].getGlobalBounds()))
-        {
-            blocks[i].setPosition(-100, 0); ballVelocityX = -ballVelocityX;
-        }
-
-    ballPosY += ballVelocityY;
-    for (int i = 0; i < blockCount; i++)
-        if (FloatRect(ballPosX + 3, ballPosY + 3, 6, 6).intersects(blocks[i].getGlobalBounds()))
-        {
-            blocks[i].setPosition(-100, 0); ballVelocityY = -ballVelocityY;
-        }
-
-    if (ballPosX < 0 || ballPosX>520)  ballVelocityX = -ballVelocityX;
-    if (ballPosY < 0 || ballPosY>450)  ballVelocityY = -ballVelocityY;
-}
-
 void drawWindow(RenderWindow& window, Sprite& backgroundSprite, Sprite& ballSprite, Sprite& paddleSprite, Sprite* t_blocks, int& blockCount)
 {
     window.clear();

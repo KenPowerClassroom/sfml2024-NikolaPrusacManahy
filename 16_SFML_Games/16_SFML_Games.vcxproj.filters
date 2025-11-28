@@ -63,6 +63,9 @@
     <ClCompile Include="netwalk.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ball_collision.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Connector.hpp">

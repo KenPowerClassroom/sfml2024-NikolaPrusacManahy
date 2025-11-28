@@ -1,4 +1,5 @@
 #include "pch.h"
+#include "gtest/gtest.h"
 
 const int HEIGHT = 25;
 const int WIDTH = 40;
