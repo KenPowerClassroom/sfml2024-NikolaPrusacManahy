@@ -1,5 +1,9 @@
 #include <SFML/Graphics.hpp>
 #include <time.h>
+
+// NEW
+#include"ball_collision.h"
+
 using namespace sf;
 
 // CONSTANTS
